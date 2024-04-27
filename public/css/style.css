@@ -1,0 +1,103 @@
+:root{
+    --shadow:#7F7F7F;
+    --light-shadow:#CDCDCD;
+    --top-button:#FF3F33;
+    --middle-button:#CD3027;
+    --box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    --box-shadow-top: inset 0px -3px 16px rgba(0, 0, 0, 0.3);
+    --button-width:175px;
+    --button-height:250px;
+}
+
+.buttonDiv{
+    position:absolute;
+    top:30%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:var(--button-width);
+    height: var(--button-height); 
+    /* sum bullshit */
+}
+.buttonDiv:hover{
+    cursor: pointer;
+}
+.button-bottom-shadow{
+    box-shadow: var(--box-shadow);
+    width:100%;
+    height: 50%;
+    background-color:var(--shadow);
+    top:70%;
+}
+.button-bottom-shadow-rect{
+    width:100%;
+    height: 7%;
+    background-color:var(--shadow);
+    top:89%;
+}
+.button-bottom{
+    width:100%;
+    height: 50%;
+    background-color:var(--light-shadow);
+    top:64%;
+    box-shadow: var(--box-shadow);
+}
+
+.button-click-bottom{
+    top:70%;
+    width:75%;
+    left:12.5%;
+    height: 37.5%;
+    background-color:var(--middle-button);
+    box-shadow: var(--box-shadow);
+}
+.button-click-middle-rect{
+    top:69%;
+    width:75%;
+    left:12.5%;
+    height: 20%;
+    background-color:var(--middle-button);
+}
+.button-click{
+    top:50%;
+    width:75%;
+    left:12.5%;
+    height: 37.5%;
+    background-color:var(--top-button);
+    box-shadow: var(--box-shadow-top);
+}
+
+.buttonClickAnimation{
+    transform: translateY(20%);
+}
+
+.transition{
+    transition:all 0.3s ease, border-radius 0s;
+}
+
+.boxResizeAnimation{
+    transform: translateY(50%);
+    height:13%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+.absolute{
+    position:absolute;
+}
+
+.rounded{
+    border-radius: 50%;
+}
+
+button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+#number{
+    margin-bottom:50%;
+}
