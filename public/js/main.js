@@ -3,6 +3,7 @@ const button = document.querySelector('.buttonDiv');
 const needAnimation = document.querySelectorAll('.needAnim');
 const boxResize = document.querySelector('.boxResize');
 const buttonCount = document.querySelector('#number')
+const maxCount = document.querySelector('#maxNumber')
 
 button.addEventListener('mousedown', () => {
     needAnimation.forEach( element => {
@@ -26,6 +27,7 @@ async function onButtonClick(){
         })
         const data = await response.json()
         updateButtonCount(data.score)
+        maxCount.textContent = data.maxCount
     } catch (err){
         console.error(err)
     }

@@ -6,6 +6,7 @@ const MongoClient = require("mongodb").MongoClient
 require('dotenv').config()
 const session = require('express-session')
 const methodOverride = require('method-override')
+const maxScore = 0;
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -28,15 +29,22 @@ app.use(session({
     
 }))
 
-app.get('/', (req, res) => {
+app.get('/', async(req, res) => {
+    await db.collection(dbName).deleteMany({}); //IMPORTANT USE FOR ONLY DEBUGGING
     if(!req.session.userId){
         const user = {
             'username': 'User',
             'maxScore': 0
         }
-        
-        req.session.userId = db.collection(dbName).insertOne(user)._id;
-        
+
+
+        const result = await db.collection(dbName).insertOne(user);
+
+        if (result.acknowledged) {
+            req.session.userId = result.insertedId;
+        } else{
+            console.error("user sessioin failed")
+        }
         //db.collection(dbName).findOne({'sessionId':req.session.userId})
         //req.session.userId for find
         
@@ -48,27 +56,53 @@ app.get('/', (req, res) => {
 
 app.get('/press', async (req, res) => {
     
-    res.render('index.ejs', {currentScore: req.session.score})
+    res.render('index.ejs', {currentScore: req.session.score, maxScore: maxScore})
 })
-app.put('/updateButtonCount', (req,res) => {
-    newScore = 0
+app.put('/updateButtonCount', async (req,res) => {
+    newScore = 0 //create variable
+
+
+    //if we dont have a score then lets create one!
     if(!req.session.score) {
         newScore = 1
     } else {
-        newScore = ++req.session.score
+        if(checkIfPass()){ //check the 1/5 odds
+            newScore = ++req.session.score
+        }else { //if we fail
+            newScore = 1
+
+            //set max score to your new max score if max
+            const currentUser = await db.collection(dbName).findOne({_id: req.session.userId})
+            
+            
+            if(currentUser.maxScore < req.session.score){
+                db.collection(dbName).updateOne({_id: req.session.userId}, { //set to new max score
+                    $set: {
+                        maxScore: req.session.score
+                    }
+                },
+                {
+                    upsert: false
+                })
+            }
+            
+            //upadate max update label
+            maxScore = req.session.score //maybe dont have this global LOL
+        }
+        
     }
-    req.session.score = newScore
+    req.session.score = newScore //increase or set score
+
+
+
+    //return the score to the client
     res.json({
-        'score': req.session.score
+        'score': req.session.score,
+        'maxScore': maxScore
     })
+
 })
-app.get('/didWePass', (req, res) => {
-    const answer = true
-    if(Math.random() * 5 < 1){
-        answer = false
-    }
-    res.send(answer)
-})
+
 app.put('/changeUsername', (req, res) => {
     
     db.collection(dbName).updateOne({'sessionId':req.session.id}, {
@@ -81,5 +115,9 @@ app.put('/changeUsername', (req, res) => {
     })
     res.redirect('/press')
 })
+
+function checkIfPass(){
+    return Math.random()*5 < 1 ? false : true
+}
 
 app.listen(PORT);
