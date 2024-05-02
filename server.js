@@ -46,13 +46,8 @@ app.get('/', async(req, res) => {
         } else{
             console.error("user sessioin failed")
         }
-        //db.collection(dbName).findOne({'sessionId':req.session.userId})
-        //req.session.userId for find
-        
-        res.render('login.ejs')
-    } else{
-        res.redirect('/press')
     }
+    res.render('login.ejs')
 })
 
 app.get('/press', async (req, res) => {

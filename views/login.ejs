@@ -9,8 +9,16 @@
     
     <form action="/changeUsername?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="put" />
-        <input type="input" name="username" placeholder="Username">
-        <input type="submit">
+        <input id="text-input" type="input" name="username" placeholder="Username">
+        <input id="username-submit-button" type="submit">
+        <div id="buttonDiv">
+            <div class="button-bottom-shadow absolute rounded"></div>
+            <div class="button-bottom-shadow-rect absolute"></div>
+            <div class="button-bottom absolute rounded"></div>
+            <div class="button-click-bottom absolute rounded"></div>
+            <div class="button-click-middle-rect absolute"></div>
+            <div class="button-click absolute rounded "></div>
+        </section>
         <script src="js/login.js"></script>
     </form>
 </body>
