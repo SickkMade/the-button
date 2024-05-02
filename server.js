@@ -31,7 +31,7 @@ app.use(session({
 }))
 
 app.get('/', async(req, res) => {
-    await db.collection(dbName).deleteMany({}); //IMPORTANT USE FOR ONLY DEBUGGING
+    //await db.collection(dbName).deleteMany({}); //IMPORTANT USE FOR ONLY DEBUGGING
     if(!req.session.userId){
         const user = {
             'username': 'User',
@@ -56,8 +56,21 @@ app.get('/', async(req, res) => {
 })
 
 app.get('/press', async (req, res) => {
-    
-    res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore})
+
+    //if user does not exist
+    if(!req.session.userId){
+        res.redirect('/')
+    }
+
+    //creates an array of the top ten scores
+    const leaderboard = await db.collection(dbName).aggregate([
+        { $group: { _id: null, scores: { $push: {maxScore: "$maxScore", username:"$username" } } } },
+        { $unwind: "$scores" },
+        { $sort: { "scores.maxScore": -1 } },
+        { $limit: 10 }
+      ]).toArray();
+      console.log(leaderboard)
+    res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore, leaderboard: leaderboard})
 })
 app.put('/updateButtonCount', async (req,res) => {
     newScore = 0 //create variable

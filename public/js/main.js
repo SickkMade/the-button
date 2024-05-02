@@ -27,7 +27,7 @@ async function onButtonClick(){
         })
         const data = await response.json()
         buttonCount.textContent = data.score
-        maxCount.textContent = data.maxScore
+        maxCount.textContent = "Max Score: "+ data.maxScore
     } catch (err){
         console.error(err)
     }

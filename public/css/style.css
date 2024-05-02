@@ -18,6 +18,12 @@
     height: var(--button-height); 
     /* sum bullshit */
     
+    display:flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+.buttonDiv h1{
+    text-wrap: nowrap;
 }
 .buttonDiv:hover{
     cursor: pointer;
@@ -25,12 +31,14 @@
 .button-bottom-shadow{
     box-shadow: var(--box-shadow);
     width:100%;
+    left:0;
     height: 50%;
     background-color:var(--shadow);
     top:70%;
 }
 .button-bottom-shadow-rect{
     width:100%;
+    left:0;
     height: 7%;
     background-color:var(--shadow);
     top:89%;
@@ -40,6 +48,7 @@
     height: 50%;
     background-color:var(--light-shadow);
     top:64%;
+    left:0;
     box-shadow: var(--box-shadow);
 }
 
@@ -100,7 +109,7 @@ button {
 }
 
 #numbers{
-    margin-bottom:100%;
+    font-size:1rem;
 }
 
 #visualButton{

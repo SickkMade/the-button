@@ -6,6 +6,15 @@
     <title>THE BUTTON</title>
 </head>
 <body>
+    <section id="leaderboard">
+        <% for(let i = 0; i < leaderboard.length; i++){ %>
+            <div class="leaderboard-spot">
+                <span><%= leaderboard[i].scores.maxScore %></span>
+                <span><%= leaderboard[i].scores.username %></span>
+            </div>
+            
+        <% } %>
+    </section>
     <button class="buttonDiv">
         <div id="numbers">
             <h1 id="score"><%= currentScore %></h1>
