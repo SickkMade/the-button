@@ -1,12 +1,12 @@
 const express = require('express');
 const { appendFile } = require('fs');
+const { ObjectId } = require('mongodb');
 const app = express();
 const PORT = 8000;
 const MongoClient = require("mongodb").MongoClient
 require('dotenv').config()
 const session = require('express-session')
 const methodOverride = require('method-override')
-const maxScore = 0;
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -22,6 +22,7 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs')
 app.use(express.static('public')) //figure out this bullshit pls
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret:'secret-key',
     resave: false,
@@ -56,38 +57,37 @@ app.get('/', async(req, res) => {
 
 app.get('/press', async (req, res) => {
     
-    res.render('index.ejs', {currentScore: req.session.score, maxScore: maxScore})
+    res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore})
 })
 app.put('/updateButtonCount', async (req,res) => {
     newScore = 0 //create variable
 
-
     //if we dont have a score then lets create one!
-    if(!req.session.score) {
+    if(req.session.score == null) {
         newScore = 1
+        req.session.maxScore = 0
     } else {
         if(checkIfPass()){ //check the 1/5 odds
             newScore = ++req.session.score
         }else { //if we fail
-            newScore = 1
+            newScore = 0
+        }
 
-            //set max score to your new max score if max
-            const currentUser = await db.collection(dbName).findOne({_id: req.session.userId})
-            
-            
-            if(currentUser.maxScore < req.session.score){
-                db.collection(dbName).updateOne({_id: req.session.userId}, { //set to new max score
-                    $set: {
-                        maxScore: req.session.score
-                    }
-                },
-                {
-                    upsert: false
-                })
-            }
-            
-            //upadate max update label
-            maxScore = req.session.score //maybe dont have this global LOL
+
+        //set max score to your new max score if max
+        const currentUser = await db.collection(dbName).findOne({_id: ObjectId.createFromHexString(req.session.userId)}) //i use the same long id twice maybe fix?
+        //check/update maxscore   
+        if(currentUser.maxScore < req.session.score){
+            db.collection(dbName).updateOne({_id: ObjectId.createFromHexString(req.session.userId)}, { //set to new max score
+                $set: {
+                    maxScore: req.session.score
+                }
+            },
+            {
+                upsert: false
+            })
+            currentUser.maxScore = req.session.score
+            req.session.maxScore = req.session.score
         }
         
     }
@@ -98,16 +98,17 @@ app.put('/updateButtonCount', async (req,res) => {
     //return the score to the client
     res.json({
         'score': req.session.score,
-        'maxScore': maxScore
+        'maxScore': req.session.maxScore
     })
 
 })
 
 app.put('/changeUsername', (req, res) => {
-    
-    db.collection(dbName).updateOne({'sessionId':req.session.id}, {
+    const newUsername = req.body.username
+
+    db.collection(dbName).updateOne({_id: ObjectId.createFromHexString(req.session.userId)}, {
         $set: {
-            username: req.body.username
+            username: newUsername
         }
     },
     {

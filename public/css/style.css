@@ -11,12 +11,13 @@
 
 .buttonDiv{
     position:absolute;
-    top:30%;
+    top:40%;
     left:50%;
     transform:translate(-50%, -50%);
     width:var(--button-width);
     height: var(--button-height); 
     /* sum bullshit */
+    
 }
 .buttonDiv:hover{
     cursor: pointer;
@@ -98,6 +99,10 @@ button {
 	outline: inherit;
 }
 
-.number{
-    margin-bottom:50%;
+#numbers{
+    margin-bottom:100%;
+}
+
+#visualButton{
+    margin-top:60%;
 }

@@ -2,8 +2,8 @@
 const button = document.querySelector('.buttonDiv');
 const needAnimation = document.querySelectorAll('.needAnim');
 const boxResize = document.querySelector('.boxResize');
-const buttonCount = document.querySelector('#number')
-const maxCount = document.querySelector('#maxNumber')
+const buttonCount = document.querySelector('#score')
+const maxCount = document.querySelector('#maxScore')
 
 button.addEventListener('mousedown', () => {
     needAnimation.forEach( element => {
@@ -26,8 +26,8 @@ async function onButtonClick(){
             method:'put'
         })
         const data = await response.json()
-        updateButtonCount(data.score)
-        maxCount.textContent = data.maxCount
+        buttonCount.textContent = data.score
+        maxCount.textContent = data.maxScore
     } catch (err){
         console.error(err)
     }
