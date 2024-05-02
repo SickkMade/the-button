@@ -115,3 +115,14 @@ button {
 #visualButton{
     margin-top:60%;
 }
+
+/* OKAY THIS IS THE MOTHER FLIPPING AREA FOR LEADERBOARD CSS B) */
+/* OKAY THIS IS THE MOTHER FLIPPING AREA FOR LEADERBOARD CSS B) */
+/* OKAY THIS IS THE MOTHER FLIPPING AREA FOR LEADERBOARD CSS B) */
+/* OKAY THIS IS THE MOTHER FLIPPING AREA FOR LEADERBOARD CSS B) */
+
+#leaderboard{
+    padding: 20% 0 0 20%;
+    overflow-y:scroll;
+    height:25%;
+}

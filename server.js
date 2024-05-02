@@ -62,7 +62,7 @@ app.get('/press', async (req, res) => {
         { $group: { _id: null, scores: { $push: {maxScore: "$maxScore", username:"$username" } } } },
         { $unwind: "$scores" },
         { $sort: { "scores.maxScore": -1 } },
-        { $limit: 10 }
+        { $limit: 50 }
       ]).toArray();
       console.log(leaderboard)
     res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore, leaderboard: leaderboard})

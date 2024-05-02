@@ -9,7 +9,7 @@
     <section id="leaderboard">
         <% for(let i = 0; i < leaderboard.length; i++){ %>
             <div class="leaderboard-spot">
-                <span><%= leaderboard[i].scores.maxScore %></span>
+                <span><%=i+1+". " + leaderboard[i].scores.maxScore %></span>
                 <span><%= leaderboard[i].scores.username %></span>
             </div>
             
