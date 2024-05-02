@@ -4,10 +4,10 @@
     --light-shadow:#CDCDCD;
     --top-button:#FF3F33;
     --middle-button:#CD3027;
-    --box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    --box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     --box-shadow-top: inset 0px -3px 16px rgba(0, 0, 0, 0.3);
-    --button-width:175px;
-    --button-height:250px;
+    --button-width:58px;
+    --button-height:83px;
 }
 
 form{
@@ -31,17 +31,13 @@ form{
 }
 
 #username-submit-button{
-    width:var(--button-width);
-    height: var(--button-height); 
-    cursor:pointer;
-    margin-left:25%;
-    opacity:0;
+    
+    opacity:100;
 }
 
 #buttonDiv{
-    pointer-events: none;
     position:absolute;
-    top:40%;
+    top:200%;
     left:50%;
     transform:translate(-50%, -50%);
     width:var(--button-width);
@@ -52,9 +48,16 @@ form{
     justify-content: center;
     flex-flow: wrap;
 }
-.buttonDiv:hover{
-    cursor: pointer;
+#buttonDiv div{
+    pointer-events: none;
 }
+#buttonDiv input{
+    width:var(--button-width);
+    height: var(--button-height); 
+    margin-top:50%;
+    opacity:0;
+}
+
 .button-bottom-shadow{
     box-shadow: var(--box-shadow);
     width:100%;
@@ -109,4 +112,14 @@ form{
 
 .rounded{
     border-radius: 50%;
+}
+.noclick{
+    cursor:not-allowed;
+    filter:grayscale(50%);
+}
+.noclick input{
+    cursor:not-allowed;
+}
+.pointer-hover:hover{
+    cursor: pointer;
 }
