@@ -6,5 +6,5 @@ textInput.addEventListener('input', () => {
     divButton.classList.remove('noclick')
     buttonForRealzie.removeAttribute("disabled");
     buttonForRealzie.classList.add('pointer-hover')
-    textInput.removeEventListener("click", arguments.callee)
+    textInput.removeEventListener("click", this.callee)
 })

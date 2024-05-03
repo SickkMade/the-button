@@ -62,13 +62,14 @@ app.get('/press', async (req, res) => {
         { $group: { _id: null, scores: { $push: {maxScore: "$maxScore", username:"$username" } } } },
         { $unwind: "$scores" },
         { $sort: { "scores.maxScore": -1 } },
-        { $limit: 50 }
+        { $limit: 250 }
       ]).toArray();
-      console.log(leaderboard)
+
     res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore, leaderboard: leaderboard})
 })
 app.put('/updateButtonCount', async (req,res) => {
-    newScore = 0 //create variable
+    let newScore = 0 //create variable
+    let didFail = false
 
     //if we dont have a score then lets create one!
     if(req.session.score == null) {
@@ -78,6 +79,7 @@ app.put('/updateButtonCount', async (req,res) => {
         if(checkIfPass()){ //check the 1/5 odds
             newScore = ++req.session.score
         }else { //if we fail
+            didFail = true
             newScore = 0
         }
 
@@ -86,6 +88,7 @@ app.put('/updateButtonCount', async (req,res) => {
         const currentUser = await db.collection(dbName).findOne({_id: ObjectId.createFromHexString(req.session.userId)}) //i use the same long id twice maybe fix?
         //check/update maxscore   
         if(currentUser.maxScore < req.session.score){
+
             db.collection(dbName).updateOne({_id: ObjectId.createFromHexString(req.session.userId)}, { //set to new max score
                 $set: {
                     maxScore: req.session.score
@@ -106,7 +109,8 @@ app.put('/updateButtonCount', async (req,res) => {
     //return the score to the client
     res.json({
         'score': req.session.score,
-        'maxScore': req.session.maxScore
+        'maxScore': req.session.maxScore,
+        'didFail': didFail
     })
 
 })
