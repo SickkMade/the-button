@@ -6,13 +6,14 @@
     <title>THE BUTTON</title>
 </head>
 <body>
+    <div class="dot"></div>
     <audio id="click-audio"></audio>
     <audio id="explosion-audio"></audio>
     <section id="leaderboard">
         <% for(let i = 0; i < leaderboard.length; i++){ %>
             <div class="leaderboard-spot">
-                <span><%=i+1+". " + leaderboard[i].scores.maxScore %></span>
-                <span><%= leaderboard[i].scores.username %></span>
+                <span><%=i+1+". "+leaderboard[i].scores.maxScore%></span>
+                <span><%=leaderboard[i].scores.username%></span>
             </div>
             
         <% } %>
@@ -39,5 +40,6 @@
     </div>
     
     <script src="js/main.js"></script>
+    <script src="js/dots.js"></script>
 </body>
 </html>

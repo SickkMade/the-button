@@ -10,7 +10,12 @@
 }
 
 /* body */
-
+body{
+    /* background-color:#222831; */
+}
+span, h1 {
+    user-select: none;
+}
 
 /* big resuable stuff? */
 .grow-clickable{
@@ -177,3 +182,16 @@ button {
     100% { transform: rotate(0deg) translateY(-97%); }
   }
 /* END ANIMS */
+
+/* dot */
+.dot{
+    background-color:#31363F;
+    width:2px;
+    height:2px;
+    border-radius: 100px;
+    margin:20px;
+    position: absolute;
+    transition: all .15s ease-out;
+    z-index: -1;
+    transform:scale(0.15);
+}
