@@ -9,6 +9,18 @@
     --button-height:250px;
 }
 
+/* body */
+
+
+/* big resuable stuff? */
+.grow-clickable{
+    transition: all ease 0.2s;
+    cursor:pointer;
+}
+.grow-clickable:hover{
+    transform:scale(110%);
+}
+
 .buttonDiv{
     position:absolute;
     top:40%;
@@ -22,12 +34,10 @@
     display:flex;
     justify-content: center;
     flex-flow: wrap;
+    cursor: pointer;
 }
 .buttonDiv h1{
     text-wrap: nowrap;
-}
-.buttonDiv:hover{
-    cursor: pointer;
 }
 .button-bottom-shadow{
     box-shadow: var(--box-shadow);
@@ -81,8 +91,12 @@
     transform: translateY(20%);
 }
 
-.shake{
-    animation:tilt-shaking 0.3s
+.shake0{
+    animation:tilt-shaking-right 0.3s;
+}
+
+.shake1{
+    animation:tilt-shaking-left 0.3s;
 }
 
 .transition{
@@ -119,6 +133,8 @@ button {
 
 #visualButton{
     margin-top:60%;
+    width:100%;
+    height:100%;
 }
 
 /* OKAY THIS IS THE MOTHER FLIPPING AREA FOR LEADERBOARD CSS B) */
@@ -132,14 +148,32 @@ button {
     height:25%;
 }
 
+/* setting images */
+#settings img {
+    width: 12%;
+}
+#settings{
+    position:absolute;
+    left:5;
+    bottom:5;
+}
+
 
 
 /* ANIMS  */
-@keyframes tilt-shaking {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(0eg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
+@keyframes tilt-shaking-right {
+    0% { transform: rotate(0deg) translateY(-97%); }
+    25% { transform: rotate(2deg) translateY(-97%); }
+    50% { transform: rotate(0deg) translateY(-97%); }
+    75% { transform: rotate(-2deg) translateY(-97%); }
+    100% { transform: rotate(0deg) translateY(-97%); }
+  }
+
+  @keyframes tilt-shaking-left {
+    0% { transform: rotate(0deg) translateY(-97%); }
+    25% { transform: rotate(-2deg) translateY(-97%); }
+    50% { transform: rotate(0deg) translateY(-97%); }
+    75% { transform: rotate(2deg) translateY(-97%); }
+    100% { transform: rotate(0deg) translateY(-97%); }
   }
 /* END ANIMS */

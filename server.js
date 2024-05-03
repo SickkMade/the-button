@@ -62,7 +62,7 @@ app.get('/press', async (req, res) => {
         { $group: { _id: null, scores: { $push: {maxScore: "$maxScore", username:"$username" } } } },
         { $unwind: "$scores" },
         { $sort: { "scores.maxScore": -1 } },
-        { $limit: 250 }
+        { $limit: 25 }
       ]).toArray();
 
     res.render('index.ejs', {currentScore: req.session.score, maxScore: req.session.maxScore, leaderboard: leaderboard})
@@ -73,7 +73,7 @@ app.put('/updateButtonCount', async (req,res) => {
 
     //if we dont have a score then lets create one!
     if(req.session.score == null) {
-        newScore = 1
+        newScore = 0
         req.session.maxScore = 0
     } else {
         if(checkIfPass()){ //check the 1/5 odds

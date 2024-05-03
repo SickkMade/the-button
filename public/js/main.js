@@ -6,6 +6,7 @@ const buttonCount = document.querySelector('#score')
 const maxCount = document.querySelector('#maxScore')
 const clickAudio = document.querySelector("#click-audio")
 const explosionAudio = document.querySelector("#explosion-audio")
+const visualButton = document.querySelector('#visualButton')
 
 
 
@@ -14,14 +15,17 @@ button.addEventListener('mousedown', () => {
         element.classList.add('buttonClickAnimation')
     })
     boxResize.classList.add('boxResizeAnimation')
-    button.classList.add('shake');
+    visualButton.classList.remove('shake0');
+    visualButton.classList.remove('shake1');
+    
 });
 button.addEventListener('mouseup', () => {
     needAnimation.forEach( element => {
         element.classList.remove('buttonClickAnimation')
     })
     boxResize.classList.remove('boxResizeAnimation')
-    button.classList.remove('shake');
+    
+    visualButton.classList.add(chooseShake());
     onButtonClick()
 });
 
@@ -55,6 +59,11 @@ async function onButtonClick(){
         console.error(err)
     }
     
+}
+
+function chooseShake(){
+    return 'shake' + Math.floor(Math.random() * 2);
+
 }
 
 function updateButtonCount(n){
