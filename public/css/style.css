@@ -13,7 +13,8 @@
     position:absolute;
     top:40%;
     left:50%;
-    transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%) scale(.85);
+    transition: all 0.2s ease-out;
     width:var(--button-width);
     height: var(--button-height); 
     /* sum bullshit */
@@ -80,6 +81,10 @@
     transform: translateY(20%);
 }
 
+.shake{
+    animation:tilt-shaking 0.3s
+}
+
 .transition{
     transition:all 0.3s ease, border-radius 0s;
 }
@@ -126,3 +131,15 @@ button {
     overflow-y:scroll;
     height:25%;
 }
+
+
+
+/* ANIMS  */
+@keyframes tilt-shaking {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0eg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+/* END ANIMS */
