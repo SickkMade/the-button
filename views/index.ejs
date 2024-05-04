@@ -18,21 +18,24 @@
             
         <% } %>
     </section>
-    <button class="buttonDiv">
-        <div id="numbers">
-            <h1 id="score"><%= currentScore %></h1>
-            <h1 id="maxScore">Maxscore: <%= maxScore %></h1>
-        </div>
-       
-        <section id="visualButton">
-            <div class="button-bottom-shadow absolute rounded"></div>
-            <div class="button-bottom-shadow-rect absolute"></div>
-            <div class="button-bottom absolute rounded"></div>
-            <div class="button-click-bottom absolute rounded"></div>
-            <div class="button-click-middle-rect absolute boxResize transition "></div>
-            <div class="button-click absolute rounded needAnim transition"></div>
-        </section>
-    </button>
+    <section id="background-section">
+        <button class="buttonDiv">
+            <div id="numbers">
+                <h1 id="score"><%= currentScore %></h1>
+                <h1 id="maxScore">Maxscore: <%= maxScore %></h1>
+            </div>
+           
+            <section id="visualButton">
+                <div class="button-bottom-shadow absolute rounded"></div>
+                <div class="button-bottom-shadow-rect absolute"></div>
+                <div class="button-bottom absolute rounded"></div>
+                <div class="button-click-bottom absolute rounded"></div>
+                <div class="button-click-middle-rect absolute boxResize transition "></div>
+                <div class="button-click absolute rounded needAnim transition"></div>
+            </section>
+        </button>
+    </section>
+    
 
     <!-- settings area, like mute or my github -->
     <div id="settings">

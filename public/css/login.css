@@ -124,3 +124,15 @@ form{
 .pointer-hover:hover{
     cursor: pointer;
 }
+
+.dot{
+    background-color:#31363F;
+    width:2px;
+    height:2px;
+    border-radius: 100px;
+    margin:20px;
+    position: absolute;
+    transition: all .15s ease-out;
+    z-index: -1;
+    transform:scale(0.15);
+}

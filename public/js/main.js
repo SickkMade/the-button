@@ -7,6 +7,7 @@ const maxCount = document.querySelector('#maxScore')
 const clickAudio = document.querySelector("#click-audio")
 const explosionAudio = document.querySelector("#explosion-audio")
 const visualButton = document.querySelector('#visualButton')
+const backgroundSection = document.querySelector('#background-section')
 
 
 
@@ -32,7 +33,6 @@ button.addEventListener('mouseup', () => {
 async function onButtonClick(){
     //we are goin to maek button click change the size of button
     let scale = 0; 
-    
 
 
     try{
@@ -44,7 +44,8 @@ async function onButtonClick(){
         maxCount.textContent = "Max Score: "+ data.maxScore
         
         scale = 0.85 + (0.01 * data.score)
-        button.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        backgroundSection.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        button.style.transform = `scale(${scale *1.2}) translateY(-${data.score * 2}%)`;
 
         if(data.didFail) {
             explosionAudio.src = "sounds/explosion" + Math.floor(Math.random()* 3 +1) + ".wav"
