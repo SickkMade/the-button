@@ -6,24 +6,22 @@
     <title>THE BUTTON</title>
 </head>
 <body>
-    <div class="dot"></div>
     <audio id="click-audio"></audio>
     <audio id="explosion-audio"></audio>
     <section id="leaderboard">
         <% for(let i = 0; i < leaderboard.length; i++){ %>
             <div class="leaderboard-spot">
-                <span><%=i+1+". "+leaderboard[i].scores.maxScore%></span>
-                <span><%=leaderboard[i].scores.username%></span>
+                <span class="leaderboard-score"><%=leaderboard[i].scores.maxScore%></span>
+                <span class="leaderboard-username"><%=leaderboard[i].scores.username%></span>
             </div>
             
         <% } %>
     </section>
+    <div id="numbers">
+        <h1 id="score"><%= currentScore %></h1>
+    </div>
     <section id="background-section">
         <button class="buttonDiv">
-            <div id="numbers">
-                <h1 id="score"><%= currentScore %></h1>
-                <h1 id="maxScore">Maxscore: <%= maxScore %></h1>
-            </div>
            
             <section id="visualButton">
                 <div class="button-bottom-shadow absolute rounded"></div>
@@ -33,7 +31,10 @@
                 <div class="button-click-middle-rect absolute boxResize transition "></div>
                 <div class="button-click absolute rounded needAnim transition"></div>
             </section>
+            
         </button>
+        <h1 id="maxScore">Max Score: <%= maxScore %></h1>
+        
     </section>
     
 
@@ -43,6 +44,5 @@
     </div>
     
     <script src="js/main.js"></script>
-    <script src="js/dots.js"></script>
 </body>
 </html>

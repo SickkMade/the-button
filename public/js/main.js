@@ -11,7 +11,7 @@ const backgroundSection = document.querySelector('#background-section')
 
 
 
-button.addEventListener('mousedown', () => {
+backgroundSection.addEventListener('mousedown', () => {
     needAnimation.forEach( element => {
         element.classList.add('buttonClickAnimation')
     })
@@ -20,7 +20,7 @@ button.addEventListener('mousedown', () => {
     visualButton.classList.remove('shake1');
     
 });
-button.addEventListener('mouseup', () => {
+backgroundSection.addEventListener('mouseup', () => {
     needAnimation.forEach( element => {
         element.classList.remove('buttonClickAnimation')
     })
@@ -45,7 +45,6 @@ async function onButtonClick(){
         
         scale = 0.85 + (0.01 * data.score)
         backgroundSection.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        button.style.transform = `scale(${scale *1.2}) translateY(-${data.score * 2}%)`;
 
         if(data.didFail) {
             explosionAudio.src = "sounds/explosion" + Math.floor(Math.random()* 3 +1) + ".wav"

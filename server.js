@@ -24,7 +24,7 @@ app.use(express.static('public')) //figure out this bullshit pls
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret:'secret-key',
+    secret:process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     
@@ -73,8 +73,8 @@ app.put('/updateButtonCount', async (req,res) => {
 
     //if we dont have a score then lets create one!
     if(req.session.score == null) {
-        newScore = 0
-        req.session.maxScore = 0
+        newScore = 1
+        req.session.maxScore = 1
     } else {
         if(checkIfPass()){ //check the 1/5 odds
             newScore = ++req.session.score
